@@ -1,0 +1,6 @@
+# 가상환경 및 캐시 (상위 규칙에 추가)
+.venv/
+.venv2/
+venv/
+__pycache__/
+*.pyc
