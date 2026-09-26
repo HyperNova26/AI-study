@@ -1,5 +1,5 @@
 # Adapted from Nav2 1.3.13 nav2_default_view.rviz (Apache-2.0).
-# See ../THIRD_PARTY.md for changes and attribution.
+# Burger model, sensor TFs and a 3D LiDAR point cloud view. See ../THIRD_PARTY.md.
 Panels:
 - Class: rviz_common/Displays
   Help Height: 0
@@ -77,33 +77,19 @@ Visualization Manager:
     Frame Timeout: 15
     Frames:
       All Enabled: false
+      map:
+        Value: true
+      odom:
+        Value: true
       base_footprint:
         Value: true
       base_link:
         Value: true
       base_scan:
         Value: true
-      camera_depth_frame:
-        Value: true
-      camera_depth_optical_frame:
-        Value: true
-      camera_link:
-        Value: true
-      camera_rgb_frame:
-        Value: true
-      camera_rgb_optical_frame:
-        Value: true
-      caster_back_left_link:
-        Value: true
-      caster_back_right_link:
+      lidar_3d_link:
         Value: true
       imu_link:
-        Value: true
-      odom:
-        Value: true
-      wheel_left_link:
-        Value: true
-      wheel_right_link:
         Value: true
     Marker Scale: 1
     Name: TF
@@ -322,6 +308,25 @@ Visualization Manager:
       Value: true
     Enabled: true
     Name: Controller
+  - Class: rviz_default_plugins/PointCloud2
+    Name: 3D LiDAR
+    Enabled: true
+    Value: true
+    Topic:
+      Value: /points
+      Depth: 5
+      Reliability Policy: Best Effort
+      Durability Policy: Volatile
+      History Policy: Keep Last
+    Style: Points
+    Size (Pixels): 2
+    Size (m): 0.01
+    Alpha: 1.0
+    Position Transformer: XYZ
+    Color Transformer: AxisColor
+    Axis: Z
+    Use Fixed Frame: true
+    Decay Time: 0.0
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -359,19 +364,14 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -0.0008007669821381569
-      Class: rviz_default_plugins/TopDownOrtho
-      Enable Stereo Rendering:
-        Stereo Eye Separation: 0.05999999865889549
-        Stereo Focal Distance: 1
-        Swap Stereo Eyes: false
-        Value: false
-      Invert Z Axis: false
+      Class: rviz_default_plugins/Orbit
       Name: Current View
-      Near Clip Distance: 0.009999999776482582
-      Scale: 54
       Target Frame: <Fixed Frame>
-      Value: TopDownOrtho (rviz_default_plugins)
-      X: -5.409999847412109
-      Y: 0
+      Distance: 7.0
+      Pitch: 0.65
+      Yaw: 0.8
+      Focal Point:
+        X: 0.0
+        Y: 0.0
+        Z: 0.0
     Saved: null

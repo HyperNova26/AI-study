@@ -16,6 +16,7 @@ sudo apt-get install -y \
     ros-jazzy-navigation2 \
     ros-jazzy-nav2-bringup \
     ros-jazzy-nav2-minimal-tb3-sim \
+    ros-jazzy-turtlebot3-description \
     ros-jazzy-ros-gz \
     ros-jazzy-rviz2 \
     ros-jazzy-tf2-tools \

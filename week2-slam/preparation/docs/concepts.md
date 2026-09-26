@@ -6,7 +6,7 @@
 
 ```mermaid
 flowchart LR
-    World[Gazebo 월드와 Waffle] -->|/scan| AMCL[AMCL 위치 추정]
+    World[Gazebo 월드와 Burger] -->|/scan| AMCL[AMCL 위치 추정]
     World -->|/odom, TF| Nav2[Nav2]
     Map[지도 PGM + YAML] --> Server[map_server]
     Server -->|/map| AMCL
@@ -17,6 +17,8 @@ flowchart LR
     RViz[RViz 목표 지정] -->|NavigateToPose action| Nav2
     Nav2 -->|/cmd_vel| World
     Nav2 -->|/plan| RViz
+    World -->|/points| RViz
+    World -->|/imu| IMU[IMU 데이터 관찰]
 ```
 
 | 요소 | 하는 일 | 이 환경에서 확인하는 곳 |
@@ -27,7 +29,7 @@ flowchart LR
 | 계획 경로 | 현재 위치에서 목표까지 지나갈 위치의 순서 | NavFn, `/plan` |
 | 이동 명령 | 경로를 따라가기 위한 선속도·각속도 | MPPI 및 후처리 노드, `/cmd_vel` |
 | RViz | ROS 데이터와 좌표계를 표시하고 목표·초기 위치를 입력 | `rviz/practice.rviz` |
-| Gazebo | 로봇 운동과 센서 데이터를 시뮬레이션 | Waffle 모델과 sandbox 월드 |
+| Gazebo | 로봇 운동과 센서 데이터를 시뮬레이션 | Burger 모델과 sandbox 월드 |
 
 이 시작 환경은 저장된 지도에서 **AMCL로 위치를 추정**합니다. 새 지도를 만드는 SLAM 단계는 실행하지 않습니다. Nav2는 경로 계획과 추종을 관리하고, RViz는 상태를 보여 줍니다. RViz에 경로가 보이는 것과 시뮬레이터에서 로봇이 실제로 움직이는 것은 각각 확인해야 합니다.
 
@@ -37,18 +39,18 @@ flowchart LR
 
 기본 실행에서는 controller의 명령이 velocity smoother와 collision monitor를 거쳐 최종 `/cmd_vel`로 전달됩니다. Gazebo 브리지가 이 `geometry_msgs/msg/Twist`를 로봇의 차동 구동 시스템에 넘깁니다. 센서가 멈추거나 TF가 없으면 경로가 있어도 이동 명령이 유효하게 전달되지 않을 수 있습니다.
 
-`config/nav2_params.yaml`에서 먼저 읽을 항목은 다음과 같습니다. 주행 파라미터는 공식 기본 설정을 유지합니다. AMCL의 `set_initial_pose: true`와 `initial_pose: {x: -2.0, y: -0.5, z: 0.0, yaw: 0.0}`은 고정 생성 위치에 맞춘 공통 준비값입니다.
+`config/nav2_params.yaml`에서 먼저 읽을 항목은 다음과 같습니다. Nav2 1.3.13 기본 설정에 Burger의 크기·속도와 낮은 속도에서의 progress checker를 반영했습니다. AMCL의 `set_initial_pose: true`와 `initial_pose: {x: -2.0, y: -0.5, z: 0.0, yaw: 0.0}`은 고정 생성 위치에 맞춘 공통 준비값입니다.
 
 | 경로 | 기본값 | 의미 |
 | --- | --- | --- |
 | `amcl.ros__parameters.scan_topic` | `scan` | 위치 추정에 사용할 LiDAR |
 | `planner_server.ros__parameters.GridBased.plugin` | `nav2_navfn_planner::NavfnPlanner` | 전역 경로 계획기 |
 | `controller_server.ros__parameters.FollowPath.plugin` | `nav2_mppi_controller::MPPIController` | 경로 추종 제어기 |
-| `controller_server.ros__parameters.FollowPath.vx_max` | `0.5` m/s | 제어기의 전진 속도 상한 |
+| `controller_server.ros__parameters.FollowPath.vx_max` | `0.22` m/s | 제어기의 전진 속도 상한 |
 | `controller_server.ros__parameters.general_goal_checker.xy_goal_tolerance` | `0.25` m | 위치 도착 허용 오차 |
 | 같은 goal checker의 `yaw_goal_tolerance` | `0.25` rad | 방향 도착 허용 오차 |
-| 두 costmap의 `robot_radius` | `0.22` m | 기본 원형 충돌 모델 |
-| 두 costmap의 `inflation_layer.inflation_radius` | `0.7` m | 장애물 주변에 비용을 부여하는 범위 |
+| 두 costmap의 `robot_radius` | `0.13` m | Burger의 원형 충돌 모델 |
+| 두 costmap의 `inflation_layer.inflation_radius` | `0.35` m | 장애물 주변에 비용을 부여하는 범위 |
 
 속도나 로봇 크기를 바꾸면 controller뿐 아니라 velocity smoother, costmap, collision monitor의 관련 설정도 함께 살펴봐야 합니다. `use_sim_time=True`와 지도 경로는 launch에서 전달하므로 YAML에 값이 없어도 실행 시 적용됩니다.
 
@@ -60,15 +62,19 @@ flowchart LR
     odom -->|Gazebo DiffDrive + ros_gz_bridge| base_footprint
     base_footprint -->|robot_state_publisher| base_link
     base_link -->|robot_state_publisher| base_scan
+    base_link -->|robot_state_publisher| lidar_3d_link
+    base_link -->|robot_state_publisher| imu_link
 ```
 
-위 그림은 이 Waffle 모델의 주행·LiDAR에 필요한 가지입니다. 실제 트리에는 바퀴, IMU, 카메라 등의 프레임도 있습니다.
+위 그림은 이 Burger 모델의 주행·2D/3D LiDAR·IMU에 필요한 가지입니다. 실제 트리에는 바퀴와 LiDAR 지지대 등의 프레임도 있습니다.
 
 - `map`: 지도에 고정된 전역 기준입니다. AMCL이 오차를 보정하면 지도 기준 추정 위치가 달라질 수 있습니다.
 - `odom`: 연속적인 이동을 표현하는 기준입니다. 실제 로봇의 주행거리계는 시간이 지나면 오차가 누적될 수 있습니다.
 - `base_footprint`: 로봇 바닥면 기준입니다. 이 모델에서는 Gazebo의 주행거리계가 이 프레임까지 변환을 발행합니다.
 - `base_link`: 로봇 몸체 기준입니다.
-- `base_scan`: LiDAR 센서 기준입니다. `/scan`의 `header.frame_id`와 연결되어야 합니다.
+- `base_scan`: 2D LiDAR 기준이며 `/scan`의 `header.frame_id`입니다.
+- `lidar_3d_link`: 추가 3D LiDAR 기준이며 `/points`의 `header.frame_id`입니다.
+- `imu_link`: IMU 장착 기준이며 `/imu`의 `header.frame_id`입니다.
 
 지도와 센서 데이터를 겹치려면 해당 시각의 변환을 찾을 수 있어야 합니다. `map → odom`은 AMCL의 동적 추정값이므로 임의의 static transform으로 메우지 않습니다. 센서와 TF의 시간 기준도 `/clock`으로 맞아야 합니다.
 
@@ -99,12 +105,15 @@ ros2 run tf2_tools view_frames --ros-args -p use_sim_time:=true
 | Map | `/map`, Transient Local | 흰색은 자유 공간, 검은색은 점유 공간, 회색은 미지 영역 |
 | RobotModel | `/robot_description` | TF를 사용해 현재 추정 위치에 로봇을 표시 |
 | LaserScan | `/scan`, Best Effort | 현재 센서가 보는 장애물; 지도 벽과 정합 확인 |
+| 3D LiDAR | `/points`, Best Effort | 16채널 점군을 높이별 색으로 표시 |
 | Amcl Particle Swarm | `/particle_cloud` | AMCL이 유지하는 위치 가설들의 분포 |
 | Global Planner → Path | `/plan` | 목표까지의 전역 계획 경로 |
 | Controller | 지역 costmap, `/local_plan`, footprint | 로봇 근처의 장애물 비용과 경로 추종 상태 |
 | TF | 기본 비활성화 | 필요할 때 켜서 좌표계 방향·연결 확인 |
 
 **2D Pose Estimate**는 AMCL 초기 위치를, **Nav2 Goal**은 도착 위치·방향을 지정합니다. 기본 실행은 초기 위치를 자동 적용하지만 2D Pose Estimate로 다시 지정할 수 있습니다. 둘 다 클릭한 뒤 드래그한 방향이 로봇의 방향입니다. 초기 위치를 틀리게 주면 지도와 LiDAR가 맞지 않아 계획·주행에도 영향을 줍니다.
+
+3D LiDAR·IMU의 사양과 데이터 사용 범위는 [센서 안내](sensors.md)를 참고하세요. 현재 Nav2는 2D `/scan`을 사용하며 3D 점군 입력이나 IMU 융합은 구성하지 않습니다.
 
 ## 5. 공식 자료 읽는 순서
 
