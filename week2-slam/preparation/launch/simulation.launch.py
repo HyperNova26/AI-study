@@ -68,7 +68,7 @@ def launch_setup(context):
             launch_arguments={
                 "map": str(root / "maps/tb3_sandbox.yaml"), "params_file": params,
                 "use_sim_time": "True", "slam": "False", "autostart": "True",
-                "use_composition": "True",
+                "use_composition": "False",
             }.items(),
         ),
     ]

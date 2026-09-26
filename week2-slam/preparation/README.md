@@ -68,7 +68,7 @@ cd week2-slam/preparation
 ./scripts/run_simulation.sh
 ```
 
-Gazebo와 RViz가 함께 열리고 센서를 탑재한 Burger가 **`x=-2.0 m, y=-0.5 m, yaw=0 rad`**에서 생성됩니다. 로봇 앞쪽은 지도의 +X 방향입니다. 시뮬레이션 시간을 켜고 **AMCL에도 같은 시작 위치를 초기값으로 전달**해 Nav2 lifecycle 노드가 시작됩니다. 목표는 자동 전송하지 않습니다.
+Gazebo와 RViz가 함께 열리고 센서를 탑재한 Burger가 **`x=-2.0 m, y=-0.5 m, yaw=0 rad`**에서 생성됩니다. 로봇 앞쪽은 지도의 +X 방향입니다. 시뮬레이션 시간을 켜고 **AMCL에도 같은 시작 위치를 초기값으로 전달**해 Nav2 lifecycle 노드가 시작됩니다. 목표는 자동 전송하지 않습니다. Nav2는 종료 안정성과 노드별 진단을 위해 개별 프로세스로 실행합니다 (`use_composition=False`).
 
 `models/burger_sensors.urdf.xacro`에서 생성한 동일한 로봇 정의를 Gazebo와 `robot_state_publisher`에 전달합니다. RViz의 `3D LiDAR`에 점군이 보이며 기본 Orbit 뷰에서 시점을 돌려 높이 방향을 확인할 수 있습니다.
 
