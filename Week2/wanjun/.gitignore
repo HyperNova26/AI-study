@@ -1,0 +1,5 @@
+# Generated run reports, ROS logs and optional local recordings
+artifacts/
+log/
+frames*.pdf
+frames*.gv
