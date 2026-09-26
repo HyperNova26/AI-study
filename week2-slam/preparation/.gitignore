@@ -1,0 +1,7 @@
+# Local ROS/Gazebo runtime and diagnostic output
+log/
+install/
+.ros/
+.gz/
+frames*.pdf
+frames*.gv

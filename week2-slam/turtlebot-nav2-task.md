@@ -14,6 +14,8 @@
 - 사용할 ROS 2·Nav2 버전 및 실행 안내
 - Nav2, TF, RViz 관련 교보재
 
+공통 준비 파일과 설치·실행 안내: [preparation/README.md](preparation/README.md)
+
 #### GitHub 제출물
 
 - 본인이 작성·수정한 코드와 launch·설정 파일
