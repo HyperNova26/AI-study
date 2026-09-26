@@ -1,6 +1,6 @@
 # Nav2·TF·RViz 준비 교보재
 
-이 문서는 공통 시작 환경을 이해하기 위한 자료입니다. 개인 설정 변경에 대한 설명이나 과제 수행 결과는 각자 실습하면서 정리합니다.
+이 문서는 시뮬레이션의 Nav2·TF·RViz 구조를 이해하기 위한 자료입니다. 아래 파라미터 표는 `config/nav2_params.yaml`의 기본값입니다. `scripts/run_simulation.sh`는 여기에 개인 변경값을 병합하며 실제 적용값은 [ROBOT_SPEC.md](../ROBOT_SPEC.md), 주행 결과는 [README.md](../README.md)에 정리했습니다.
 
 ## 1. 데이터가 흐르는 순서
 
@@ -39,7 +39,7 @@ flowchart LR
 
 기본 실행에서는 controller의 명령이 velocity smoother와 collision monitor를 거쳐 최종 `/cmd_vel`로 전달됩니다. Gazebo 브리지가 이 `geometry_msgs/msg/Twist`를 로봇의 차동 구동 시스템에 넘깁니다. 센서가 멈추거나 TF가 없으면 경로가 있어도 이동 명령이 유효하게 전달되지 않을 수 있습니다.
 
-`config/nav2_params.yaml`에서 먼저 읽을 항목은 다음과 같습니다. Nav2 1.3.13 기본 설정에 Burger의 크기·속도와 낮은 속도에서의 progress checker를 반영했습니다. AMCL의 `set_initial_pose: true`와 `initial_pose: {x: -2.0, y: -0.5, z: 0.0, yaw: 0.0}`은 고정 생성 위치에 맞춘 공통 준비값입니다.
+`config/nav2_params.yaml`에서 먼저 읽을 항목은 다음과 같습니다. Nav2 1.3.13 기본 설정에 Burger의 크기·속도와 낮은 속도에서의 progress checker를 반영했습니다. AMCL의 `set_initial_pose: true`와 `initial_pose: {x: -2.0, y: -0.5, z: 0.0, yaw: 0.0}`은 고정 생성 위치에 맞춘 기본값입니다.
 
 | 경로 | 기본값 | 의미 |
 | --- | --- | --- |
@@ -78,7 +78,7 @@ flowchart LR
 
 지도와 센서 데이터를 겹치려면 해당 시각의 변환을 찾을 수 있어야 합니다. `map → odom`은 AMCL의 동적 추정값이므로 임의의 static transform으로 메우지 않습니다. 센서와 TF의 시간 기준도 `/clock`으로 맞아야 합니다.
 
-별도 터미널에서 준비 폴더로 이동하고 환경을 설정한 뒤 조회합니다.
+별도 터미널에서 `week2-slam/wanjun` 폴더로 이동하고 환경을 설정한 뒤 조회합니다.
 
 ```bash
 source scripts/env.sh
@@ -108,12 +108,14 @@ ros2 run tf2_tools view_frames --ros-args -p use_sim_time:=true
 | 3D LiDAR | `/points`, Best Effort | 16채널 점군을 높이별 색으로 표시 |
 | Amcl Particle Swarm | `/particle_cloud` | AMCL이 유지하는 위치 가설들의 분포 |
 | Global Planner → Path | `/plan` | 목표까지의 전역 계획 경로 |
-| Controller | 지역 costmap, `/local_plan`, footprint | 로봇 근처의 장애물 비용과 경로 추종 상태 |
+| Controller | 지역 costmap, footprint | 로봇 근처의 장애물 비용과 로봇 윤곽 |
 | TF | 기본 비활성화 | 필요할 때 켜서 좌표계 방향·연결 확인 |
+
+이 MPPI 설정의 경로 시각화 토픽은 `/optimal_trajectory`와 `/transformed_global_plan`입니다. 기본 RViz 설정의 `/local_plan` 디스플레이는 현재 발행 토픽과 다르므로 제어 궤적을 보려면 `/optimal_trajectory`로 바꿉니다. 전역 계획은 기존 `/plan`에서 확인합니다.
 
 **2D Pose Estimate**는 AMCL 초기 위치를, **Nav2 Goal**은 도착 위치·방향을 지정합니다. 기본 실행은 초기 위치를 자동 적용하지만 2D Pose Estimate로 다시 지정할 수 있습니다. 둘 다 클릭한 뒤 드래그한 방향이 로봇의 방향입니다. 초기 위치를 틀리게 주면 지도와 LiDAR가 맞지 않아 계획·주행에도 영향을 줍니다.
 
-3D LiDAR·IMU의 사양과 데이터 사용 범위는 [센서 안내](sensors.md)를 참고하세요. 현재 Nav2는 2D `/scan`을 사용하며 3D 점군 입력이나 IMU 융합은 구성하지 않습니다.
+3D LiDAR·IMU의 사양과 데이터 사용 범위는 [로봇 사양](../ROBOT_SPEC.md)를 참고하세요. 현재 Nav2는 2D `/scan`을 사용하며 3D 점군 입력이나 IMU 융합은 구성하지 않습니다.
 
 ## 5. 공식 자료 읽는 순서
 

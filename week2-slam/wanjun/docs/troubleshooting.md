@@ -1,6 +1,6 @@
 # 실행 문제 확인 순서
 
-모든 명령은 `week2-slam/preparation`에서 `source scripts/env.sh`를 실행한 별도 터미널 기준입니다. `echo`, `hz`, `tf2_echo`가 계속 실행되면 확인 후 `Ctrl+C`로 종료합니다.
+모든 명령은 `week2-slam/wanjun`에서 `source scripts/env.sh`를 실행한 별도 터미널 기준입니다. `echo`, `hz`, `tf2_echo`가 계속 실행되면 확인 후 `Ctrl+C`로 종료합니다.
 
 ## 설치·실행 단계
 
@@ -53,9 +53,9 @@ ros2 run tf2_ros tf2_echo odom base_footprint
 
 지도 서버는 `active`여야 하며 이미지 경로는 `maps/tb3_sandbox.yaml` 기준으로 해석됩니다. RViz Map의 Durability를 `Transient Local`로 맞추면 이미 발행된 지도도 받을 수 있습니다.
 
-`odom → base_footprint`는 보이는데 `map → base_link`가 없으면 공통 설정의 `amcl.set_initial_pose`가 적용됐는지 확인하고, RViz의 **2D Pose Estimate**로 위치를 다시 지정합니다. 시작 위치는 `(-2.0, -0.5)`, 방향은 +X입니다. 여전히 변환이 없다면 AMCL의 Active 상태와 `/scan` 수신을 확인합니다. 시작 직후의 일시적인 `map` TF 경고와 위치 적용 후에도 지속되는 오류를 구분합니다.
+`odom → base_footprint`는 보이는데 `map → base_link`가 없으면 기본 설정의 `amcl.set_initial_pose`가 적용됐는지 확인하고, RViz의 **2D Pose Estimate**로 위치를 다시 지정합니다. 시작 위치는 `(-2.0, -0.5)`, 방향은 +X입니다. 여전히 변환이 없다면 AMCL의 Active 상태와 `/scan` 수신을 확인합니다. 시작 직후의 일시적인 `map` TF 경고와 위치 적용 후에도 지속되는 오류를 구분합니다.
 
-개인 설정에서 자동 초기 위치를 껐다면 Nav2 시작 시 TF 대기 제한 시간 안에 2D Pose Estimate를 지정해야 합니다. `Failed to activate global_costmap` 이후에는 위치만 지정해도 자동 복구되지 않을 수 있으므로 공통 설정으로 launch를 재시작해 확인하세요.
+개인 설정에서 자동 초기 위치를 껐다면 Nav2 시작 시 TF 대기 제한 시간 안에 2D Pose Estimate를 지정해야 합니다. `Failed to activate global_costmap` 이후에는 위치만 지정해도 자동 복구되지 않을 수 있으므로 기본 설정으로 launch를 재시작해 확인하세요.
 
 로봇과 스캔이 지도 밖에 보이거나 벽과 크게 어긋나면 초기 위치·방향을 다시 지정합니다. 이 폴더의 지도는 sandbox 월드용입니다. 다른 예제의 `map.yaml`을 연결하면 맞지 않을 수 있습니다.
 
@@ -72,7 +72,7 @@ ros2 topic info /cmd_vel -v
 
 MPPI 설정으로 아주 가까운 옆 방향 목표를 주면 `Failed to make progress` 이후 costmap 초기화나 회전 복구가 실행될 수 있습니다. 목표 방향·주변 costmap을 함께 확인하고, 처음에는 로봇 앞쪽의 충분히 열린 공간에서 시작하세요.
 
-경로는 보이지만 로봇이 움직이지 않으면 `/cmd_vel`의 발행자와 구독자, `/scan`의 최신 수신 여부, collision monitor의 메시지를 확인합니다. 이 준비 환경의 브리지는 `geometry_msgs/msg/Twist`를 사용합니다. 다른 ROS 배포판이나 `TwistStamped` 설정을 가져오면 연결이 맞지 않을 수 있습니다.
+경로는 보이지만 로봇이 움직이지 않으면 `/cmd_vel`의 발행자와 구독자, `/scan`의 최신 수신 여부, collision monitor의 메시지를 확인합니다. 이 시뮬레이션 환경의 브리지는 `geometry_msgs/msg/Twist`를 사용합니다. 다른 ROS 배포판이나 `TwistStamped` 설정을 가져오면 연결이 맞지 않을 수 있습니다.
 
 오류를 확인할 때는 launch 터미널의 최초 오류와 관련 노드 이름부터 살펴보세요. 전체 ROS 프로세스를 일괄 종료하기보다 자신이 실행한 launch를 종료하고 다시 시작합니다.
 
@@ -80,6 +80,6 @@ MPPI 설정으로 아주 가까운 옆 방향 목표를 주면 `Failed to make p
 
 `/scan`은 나오는데 `/points`가 없으면 `config/bridge.yaml`의 Gazebo `/lidar_3d/points` → ROS `/points` 항목을 확인합니다. `/points`의 타입은 `PointCloud2`입니다. RViz에서 `3D LiDAR`를 켜고 QoS를 Best Effort로 사용합니다. Orbit 뷰로 시점을 돌려 수직 구조를 확인하세요.
 
-`/imu`는 `sensor_msgs/msg/Imu`, 프레임은 `imu_link`여야 합니다. 월드의 Gazebo IMU 시스템과 모델의 IMU 센서가 모두 있어야 데이터가 나옵니다. 준비 launch가 사용하는 sandbox 월드에는 이 시스템이 포함되어 있습니다.
+`/imu`는 `sensor_msgs/msg/Imu`, 프레임은 `imu_link`여야 합니다. 월드의 Gazebo IMU 시스템과 모델의 IMU 센서가 모두 있어야 데이터가 나옵니다. 시뮬레이션 launch가 사용하는 sandbox 월드에는 이 시스템이 포함되어 있습니다.
 
 Gazebo가 `gz_frame_id`를 표준 SDF 요소로 알지 못한다는 경고와 함께 복사한다고 표시할 수 있습니다. 이는 센서 메시지 프레임 지정에 쓰는 Gazebo 확장 요소입니다. 실제 센서 토픽과 TF가 연결되는지를 확인하세요. 자세한 수신·장착 TF 점검은 [센서 안내](sensors.md)를 참고합니다.

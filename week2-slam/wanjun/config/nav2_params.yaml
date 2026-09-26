@@ -1,10 +1,10 @@
 # Based on Nav2 1.3.13 parameters (Apache-2.0). See ../THIRD_PARTY.md.
 # Burger baseline: fixed initial pose, 0.13 m radius and 0.22 m/s limit.
-# See ../THIRD_PARTY.md and ../docs/sensors.md for common preparation changes.
+# See ../THIRD_PARTY.md and ../docs/sensors.md for Burger baseline changes.
 # use_sim_time and map path are supplied by the launch file.
 amcl:
   ros__parameters:
-    # Common preparation setting, matching launch/simulation.launch.py.
+    # Baseline setting, matching launch/simulation.launch.py.
     # Avoid Nav2's initial TF timeout while a learner reads the instructions.
     set_initial_pose: true
     initial_pose:

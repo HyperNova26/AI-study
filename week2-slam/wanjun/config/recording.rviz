@@ -1,4 +1,4 @@
-# Adapted from the shared practice.rviz (Nav2 Apache-2.0); see ../../../week2-slam/preparation/THIRD_PARTY.md.
+# Adapted from the ../rviz/practice.rviz (Nav2 Apache-2.0); see ../THIRD_PARTY.md.
 # Oblique view of the map, global plan and height-colored 3D LiDAR point cloud.
 Panels:
 - Class: rviz_common/Displays

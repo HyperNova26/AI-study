@@ -1,50 +1,8 @@
-# TurtleBot3 Burger + 3D LiDAR·IMU 준비 환경
+# 설치·기본 시뮬레이션 실행 안내
 
-[2주차 인지팀 과제](../turtlebot-nav2-task.md)의 **제공되는 것**을 준비하는 폴더입니다. 개인 제출 코드, 수행 결과, 영상, 스크린샷은 포함하지 않습니다.
+버전·센서·토픽·TF·지도 정보는 [ROBOT_SPEC.md](ROBOT_SPEC.md)에 모았습니다. 개인 목표 주행과 결과 영상은 [README.md](README.md)를 참고합니다.
 
-## 사용할 환경
-
-| 항목 | 기준 |
-| --- | --- |
-| OS | Ubuntu 24.04 LTS, 데스크톱 환경 |
-| ROS 2 | Jazzy Jalisco |
-| Nav2 | Jazzy용 1.3.x, 제공 설정의 기준 버전 **1.3.13** |
-| 시뮬레이터 | Gazebo Harmonic (`gz sim` 8.x) |
-| 로봇 | TurtleBot3 **Burger**, ROBOTIS `turtlebot3_description` 기반 |
-| 추가 센서 | 16채널 3D LiDAR (`/points`) + 200 Hz 설정 IMU (`/imu`) |
-| 실습 공간 | `nav2_minimal_tb3_sim/worlds/tb3_sandbox.sdf.xacro` |
-| 지도 | 이 폴더의 `maps/tb3_sandbox.yaml` + `.pgm` |
-| 위치 추정 | 제공된 지도 + AMCL (`slam:=False`) |
-| 기본 계획·제어 | NavFn 전역 경로 계획 + MPPI 경로 추종 |
-
-[Nav2 Jazzy Quickstart](https://docs.nav2.org/jazzy/getting_started/quickstart/quickstart/)의 Nav2 bringup과 sandbox 월드·지도를 사용하고, 로봇은 **Burger + 추가 센서**로 구성합니다. Burger 기본 URDF·메시는 `turtlebot3_description`, 월드는 `nav2_minimal_tb3_sim` 패키지에서 읽습니다. 센서·구동 플러그인과 브리지 설정은 이 폴더에 있습니다. `TURTLEBOT3_MODEL` 설정이나 별도 소스 빌드는 필요하지 않습니다.
-
-기본 2D LDS `/scan`은 Nav2에 사용하고, 추가 3D LiDAR `/points`는 RViz에서 확인합니다. IMU 데이터는 `/imu`로 제공합니다. 사양·장착 좌표·데이터 사용 범위는 [센서 안내](docs/sensors.md)에 정리했습니다.
-
-[Gazebo의 ROS 호환 안내](https://gazebosim.org/docs/harmonic/ros_installation/)에 따라 Jazzy와 Harmonic을 함께 사용합니다. Humble/Gazebo Classic용 `gazebo`, `gazebo_ros`, `turtlebot3_gazebo` 명령과 섞지 마세요. Windows/macOS에서는 Ubuntu 24.04 데스크톱 VM 등으로 이 OS 환경을 먼저 준비하세요. 그래픽 가속과 디스플레이를 사용할 수 있어야 합니다.
-
-## 제공 파일
-
-```text
-preparation/
-├── README.md                       # 설치·실행 안내
-├── launch/simulation.launch.py     # Gazebo + Burger + 센서 + Nav2 + RViz
-├── models/burger_sensors.urdf.xacro # Burger + 3D LiDAR·IMU·구동기
-├── config/bridge.yaml              # /points·/imu 포함 ROS/Gazebo 변환
-├── maps/tb3_sandbox.{yaml,pgm}      # 월드와 대응하는 공식 지도
-├── config/nav2_params.yaml         # Nav2 1.3.13 기반 Burger 주행 설정
-├── rviz/practice.rviz              # 지도·로봇·센서·경로·costmap 화면
-├── scripts/
-│   ├── install_dependencies.sh     # Jazzy 설치 후 추가 패키지 설치
-│   ├── env.sh                      # 터미널별 ROS 환경
-│   ├── check_environment.sh        # 패키지·모델·지도 파일 검사
-│   └── run_simulation.sh           # 빌드 없이 실행
-├── docs/concepts.md                # Nav2·TF·RViz 교보재
-├── docs/sensors.md                 # 센서 사양·장착 TF·점검 명령
-├── docs/troubleshooting.md         # 실행 문제 확인 순서
-├── THIRD_PARTY.md                  # 공식 자산의 출처·변경 사항
-└── licenses/Apache-2.0.txt
-```
+이 문서의 `run_base_simulation.sh`는 `config/nav2_params.yaml`의 기본값으로 실행합니다. 개인 변경값까지 적용하는 제출 실행은 `run_simulation.sh`를 사용합니다. 두 스크립트는 같은 모델·지도·센서를 사용하며 동시에 실행하지 않습니다.
 
 ## 설치
 
@@ -53,19 +11,19 @@ preparation/
 
 ```bash
 # AI-study 저장소 루트에서
-cd week2-slam/preparation
+cd week2-slam/wanjun
 ./scripts/install_dependencies.sh
 ./scripts/check_environment.sh
 ```
 
-설치 스크립트는 `sudo apt-get`으로 Nav2, 최소 TB3 월드, Burger description, `ros_gz`, RViz, TF 도구 등을 설치합니다. 이미 설치한 시스템에서도 사용할 수 있습니다. ROS apt 저장소에서 Jazzy용 패키지를 받으므로 패치 버전은 업데이트 시점에 따라 달라질 수 있습니다. 이 폴더의 지도·Nav2 설정은 1.3.13에서 가져왔으며, 설정에는 공통 시작 위치와 Burger용 크기·속도 제한을 적용했습니다. 설치된 버전은 검사 스크립트로 확인하세요.
+설치 스크립트는 `sudo apt-get`으로 Nav2, 최소 TB3 월드, Burger description, `ros_gz`, RViz, TF 도구 등을 설치합니다. 이미 설치한 시스템에서도 사용할 수 있습니다. ROS apt 저장소에서 Jazzy용 패키지를 받으므로 패치 버전은 업데이트 시점에 따라 달라질 수 있습니다. 이 폴더의 지도·Nav2 설정은 1.3.13에서 가져왔으며, 설정에는 기본 시작 위치와 Burger용 크기·속도 제한을 적용했습니다. 설치된 버전은 검사 스크립트로 확인하세요.
 
 ## 실행
 
-이하 명령은 `week2-slam/preparation` 폴더 기준입니다.
+이하 명령은 `week2-slam/wanjun` 폴더 기준입니다.
 
 ```bash
-./scripts/run_simulation.sh
+./scripts/run_base_simulation.sh
 ```
 
 Gazebo와 RViz가 함께 열리고 센서를 탑재한 Burger가 **`x=-2.0 m, y=-0.5 m, yaw=0 rad`**에서 생성됩니다. 로봇 앞쪽은 지도의 +X 방향입니다. 시뮬레이션 시간을 켜고 **AMCL에도 같은 시작 위치를 초기값으로 전달**해 Nav2 lifecycle 노드가 시작됩니다. 목표는 자동 전송하지 않습니다. Nav2는 종료 안정성과 노드별 진단을 위해 개별 프로세스로 실행합니다 (`use_composition=False`).
@@ -88,14 +46,14 @@ GUI를 줄여 실행할 수도 있습니다. `True`/`False`의 대소문자를 �
 
 ```bash
 # Gazebo 창만 닫고 RViz는 표시
-./scripts/run_simulation.sh headless:=True
+./scripts/run_base_simulation.sh headless:=True
 
 # 두 창 모두 생략; GPU LiDAR 때문에 센서 렌더링 환경은 여전히 필요
-./scripts/run_simulation.sh headless:=True use_rviz:=False
+./scripts/run_base_simulation.sh headless:=True use_rviz:=False
 
-# 준비된 기본 설정을 살펴보거나 launch 인자 확인
+# 기본 설정을 살펴보거나 launch 인자 확인
 less config/nav2_params.yaml
-./scripts/run_simulation.sh --show-args
+./scripts/run_base_simulation.sh --show-args
 ```
 
 개인 실습에서 수정한 전체 Nav2 설정을 사용하려면 `params_file:=/절대/경로/nav2_params.yaml`을 전달합니다. 기본 지도와 월드는 한 쌍이며, 다른 지도를 사용하려면 실제 월드와의 일치 여부를 별도로 확인해야 합니다.
@@ -116,7 +74,7 @@ less config/nav2_params.yaml
 시뮬레이션을 켠 상태에서 **별도 터미널**을 열고 실행합니다.
 
 ```bash
-cd /path/to/AI-study/week2-slam/preparation  # 실제 clone 경로로 변경
+cd /path/to/AI-study/week2-slam/wanjun  # 실제 clone 경로로 변경
 source scripts/env.sh
 
 ros2 topic echo /clock --once

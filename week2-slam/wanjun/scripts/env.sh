@@ -5,7 +5,7 @@ if [[ -n "${ROS_DISTRO:-}" && "$ROS_DISTRO" != jazzy ]]; then
     return 1
 fi
 if [[ ! -f /opt/ros/jazzy/setup.bash ]]; then
-    printf 'ROS 2 Jazzy가 없습니다. preparation/README.md의 설치 안내를 확인하세요.\n' >&2
+    printf 'ROS 2 Jazzy가 없습니다. week2-slam/wanjun/SETUP.md의 설치 안내를 확인하세요.\n' >&2
     return 1
 fi
 # ROS setup files may reference unset variables; source before enabling nounset.

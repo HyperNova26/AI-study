@@ -3,11 +3,11 @@ set -eo pipefail
 
 source /etc/os-release
 if [[ "$ID" != ubuntu || "$VERSION_ID" != 24.04 ]]; then
-    printf '이 준비 환경은 Ubuntu 24.04용입니다. 현재 OS: %s\n' "$PRETTY_NAME" >&2
+    printf '이 시뮬레이션 환경은 Ubuntu 24.04용입니다. 현재 OS: %s\n' "$PRETTY_NAME" >&2
     exit 1
 fi
 if [[ ! -f /opt/ros/jazzy/setup.bash ]]; then
-    printf '먼저 README의 공식 설치 안내로 ros-jazzy-desktop을 설치하세요.\n' >&2
+    printf '먼저 SETUP.md의 공식 설치 안내로 ros-jazzy-desktop을 설치하세요.\n' >&2
     exit 1
 fi
 

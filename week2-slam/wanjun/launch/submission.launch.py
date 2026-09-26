@@ -1,4 +1,4 @@
-"""Reuse the shared Burger simulator with the student's Nav2 overrides."""
+"""Run the local Burger simulator with the student's Nav2 overrides."""
 
 from pathlib import Path
 import tempfile
@@ -28,8 +28,7 @@ def merge_parameters(base, overrides, prefix=""):
 
 def launch_setup(context):
     student = Path(__file__).resolve().parents[1]
-    shared = student.parents[1] / "week2-slam/preparation"
-    baseline = yaml.safe_load((shared / "config/nav2_params.yaml").read_text())
+    baseline = yaml.safe_load((student / "config/nav2_params.yaml").read_text())
     overrides = yaml.safe_load((student / "config/nav2_overrides.yaml").read_text())
     params = merge_parameters(baseline, overrides)
     with tempfile.NamedTemporaryFile(mode="w", prefix="wanjun_nav2_", suffix=".yaml", delete=False) as stream:
@@ -42,7 +41,7 @@ def launch_setup(context):
     return [
         RegisterEventHandler(OnShutdown(on_shutdown=[OpaqueFunction(function=cleanup)])),
         IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(str(shared / "launch/simulation.launch.py")),
+            PythonLaunchDescriptionSource(str(student / "launch/simulation.launch.py")),
             launch_arguments={
                 "params_file": str(params_path),
                 "headless": LaunchConfiguration("headless"),
