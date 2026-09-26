@@ -18,9 +18,11 @@ Week2/wanjun/
 ├── navigate_to_goal.py           # Nav2 action 클라이언트와 결과 기록
 ├── config/goal.yaml              # 기본 목표 좌표와 제한 시간
 ├── config/nav2_overrides.yaml    # 개인 Nav2 변경값
+├── config/recording.rviz         # 지도·경로·3D 점군을 함께 보는 촬영 시점
 ├── launch/submission.launch.py   # 기본 설정에 변경값을 병합하고 시뮬레이션 시작
 ├── scripts/run_simulation.sh
 ├── scripts/run_goal.sh
+├── media/                       # 실제 주행 영상·RViz 캡처·해당 실행 결과
 └── README.md
 ```
 
@@ -144,14 +146,40 @@ GUI를 줄여 검증하려면 다음처럼 실행합니다. GPU 센서 렌더링
 
 위 숫자는 한 번의 실제 검증 결과이며 성능 보장값은 아닙니다. 성공 여부는 Nav2 action 결과로 판정합니다. 오차는 결과 수신 후 읽은 TF로 계산하므로 제어기가 도착 판정을 내린 순간의 값과 조금 다를 수 있습니다.
 
-## 영상·Notion·PR 제출 시 남은 항목
+## 주행 영상과 RViz 캡처
 
-- 자율주행 영상: 아직 첨부하지 않았습니다. 녹화를 시작한 다음 목표 실행 명령을 입력하고 `SUCCEEDED`와 도착 모습까지 담습니다.
-- RViz 지도·계획 경로 화면: 아직 첨부하지 않았습니다. 경로는 주행 중에 확인·촬영합니다.
+2026-09-26에 개인 설정을 적용한 Burger를 시작점에서 다시 실행하고 촬영했습니다. **목표 전송 전부터 `SUCCEEDED` 확인 후까지 이어지는 실제 RViz 화면**이며, 재생 속도는 1배입니다. 화면 위 자막에는 실행할 명령, 목표 좌표, 실제 action 피드백과 최종 결과를 표시했습니다.
+
+- [자율주행 영상 — MP4](media/nav2-navigation.mp4)
+- [RViz 원본 캡처 — PNG](media/rviz-map-path.png)
+- [이 촬영의 실행 결과 — JSON](media/navigation-run.json)
+
+영상은 30.28초, 1440×1008, 25 fps의 H.264 MP4(약 8.3 MB)입니다. 이 촬영의 실행 결과는 `SUCCEEDED`, 준비 대기를 포함한 실제 경과 시간 21.676초, 최종 위치 오차 약 0.147 m, 최대 선속도 명령 0.18 m/s였습니다.
+
+[![RViz 지도·파란 전역 경로·높이별 3D LiDAR 점군](media/rviz-map-path.png)](media/nav2-navigation.mp4)
+
+카메라는 바닥을 약 49도 내려다보는 Orbit 시점입니다. 파란 선은 `/plan` 전역 경로이며, 벽과 기둥 주변의 무지개색 점군은 `/points`를 높이(Z)에 따라 표시한 3D LiDAR 데이터입니다. PNG는 같은 주행 중에 캡처한 RViz 원본 화면입니다. 영상 초반 일부 프레임에서 점군의 `Transform` 상태가 `Error`로 표시된 뒤 `Ok`로 돌아오는 모습도 그대로 포함했습니다. 주행 중 캡처와 도착 장면에서는 정상 상태를 확인했습니다.
+
+촬영 시점과 같은 구도로 실행하려면 저장소 루트에서 다음 순서로 실행합니다.
+
+```bash
+# 터미널 1: 시뮬레이션과 Nav2
+./Week2/wanjun/scripts/run_simulation.sh headless:=True use_rviz:=False
+
+# 터미널 2: 촬영용 RViz 보기
+source ./week2-slam/preparation/scripts/env.sh
+rviz2 -d ./Week2/wanjun/config/recording.rviz --ros-args -p use_sim_time:=true
+
+# 터미널 3: 목표 전송
+./Week2/wanjun/scripts/run_goal.sh
+```
+
+MP4와 PNG는 제출을 위해 선별한 결과물로 커밋했습니다. 일반 실행에서 생성하는 `artifacts/` 결과는 계속 제외합니다.
+
+## Notion·PR 제출 시 남은 항목
+
 - 개인 Notion 학습 페이지: 아직 기재하지 않았습니다. 시도한 설정, 관찰 결과, 문제 해결 과정을 본인이 정리하고 링크를 추가합니다.
-- PR: 직접 생성하고 운영자를 Reviewer로 지정하며 본문에 멘션합니다. 미디어 업로드 방식은 저장소 운영 기준을 따르고 README와 PR에서 접근할 수 있도록 연결합니다.
-
-JSON 결과와 실행 코드만으로 영상·RViz 화면 제출 요건을 대신하지 않습니다.
+- PR: 직접 생성하고 운영자를 Reviewer로 지정하며 본문에 멘션합니다.
 
 ## 참고 자료
 

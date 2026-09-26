@@ -1,0 +1,146 @@
+{
+  "started_at_utc": "2026-09-26T11:49:35.403320+00:00",
+  "goal": {
+    "frame_id": "map",
+    "x": 1.5,
+    "y": -0.5,
+    "yaw": 0.0,
+    "startup_timeout": 60.0,
+    "navigation_timeout": 180.0
+  },
+  "status": "SUCCEEDED",
+  "start_pose": {
+    "x": -2.0000000000000044,
+    "y": -0.5,
+    "yaw": 8.797645873944728e-15
+  },
+  "action_status": "SUCCEEDED",
+  "nav2_error_code": 0,
+  "nav2_error_message": "",
+  "elapsed_wall_seconds": 21.676,
+  "final_pose": {
+    "x": 1.380555782609746,
+    "y": -0.5854676216171942,
+    "yaw": 0.013633888752961183
+  },
+  "topic_message_counts": {
+    "/clock": 21435,
+    "/imu": 4287,
+    "/odom": 630,
+    "/points": 214,
+    "/scan": 107,
+    "/map": 1,
+    "/plan": 20,
+    "/cmd_vel": 406
+  },
+  "max_abs_cmd_vel_linear_x": 0.18,
+  "feedback": [
+    {
+      "distance_remaining_m": 0.0,
+      "navigation_time_s": 0.0,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.7457115650177,
+      "navigation_time_s": 1.006,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.620711088180542,
+      "navigation_time_s": 2.006,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.4207091331481934,
+      "navigation_time_s": 3.006,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.24570894241333,
+      "navigation_time_s": 4.006,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.070711851119995,
+      "navigation_time_s": 5.016,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 2.8207106590270996,
+      "navigation_time_s": 6.016,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 2.5707099437713623,
+      "navigation_time_s": 7.026,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 2.3707103729248047,
+      "navigation_time_s": 8.026,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 2.3457112312316895,
+      "navigation_time_s": 9.036,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 2.0207104682922363,
+      "navigation_time_s": 10.046,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 1.8957105875015259,
+      "navigation_time_s": 11.046,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 1.670710802078247,
+      "navigation_time_s": 12.056,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 1.4457099437713623,
+      "navigation_time_s": 13.056,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 1.5544781684875488,
+      "navigation_time_s": 14.056,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 1.095710039138794,
+      "navigation_time_s": 15.056,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 0.9207105040550232,
+      "navigation_time_s": 16.066,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 0.7457120418548584,
+      "navigation_time_s": 17.076,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 0.7354503870010376,
+      "navigation_time_s": 18.076,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 0.4207116365432739,
+      "navigation_time_s": 19.086,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 0.1957106590270996,
+      "navigation_time_s": 20.086,
+      "recoveries": 0
+    }
+  ],
+  "position_error_m": 0.14687285458133548,
+  "yaw_error_rad": 0.013633888752961183
+}
