@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<robot name="turtlebot3_burger" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- Official Burger geometry/inertias/TF from the installed Apache-2.0 package. -->
+  <xacro:include filename="$(find turtlebot3_description)/urdf/turtlebot3_burger.urdf"/>
+
+  <!-- Additional generic 16-channel LiDAR, above the original 2D LDS. -->
+  <joint name="lidar_3d_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_3d_link"/>
+    <origin xyz="-0.032 0 0.26" rpy="0 0 0"/>
+  </joint>
+  <link name="lidar_3d_link">
+    <inertial>
+      <mass value="0.10"/>
+      <inertia ixx="0.00005" ixy="0" ixz="0" iyy="0.00005" iyz="0" izz="0.000045"/>
+    </inertial>
+    <visual>
+      <geometry><cylinder radius="0.03" length="0.055"/></geometry>
+      <material name="lidar_blue"><color rgba="0.1 0.4 0.8 1"/></material>
+    </visual>
+    <collision>
+      <geometry><cylinder radius="0.03" length="0.055"/></geometry>
+    </collision>
+  </link>
+  <!-- A narrow mast leaves the original 2D scanning plane unobstructed. -->
+  <joint name="lidar_mount_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_mount_link"/>
+    <origin xyz="-0.032 0 0.212" rpy="0 0 0"/>
+  </joint>
+  <link name="lidar_mount_link">
+    <inertial>
+      <mass value="0.02"/>
+      <inertia ixx="0.000004" ixy="0" ixz="0" iyy="0.000004" iyz="0" izz="0.000001"/>
+    </inertial>
+    <visual>
+      <geometry><cylinder radius="0.008" length="0.042"/></geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry><cylinder radius="0.008" length="0.042"/></geometry>
+    </collision>
+  </link>
+
+  <!-- The converter moves sensors with fixed joints into the parent link.
+       gz_frame_id keeps ROS messages in the original URDF sensor frame. -->
+  <gazebo reference="base_scan">
+    <sensor name="burger_2d_lidar" type="gpu_lidar">
+      <always_on>true</always_on>
+      <update_rate>5</update_rate>
+      <topic>/scan</topic>
+      <gz_frame_id>base_scan</gz_frame_id>
+      <lidar>
+        <scan>
+          <horizontal>
+            <samples>360</samples><resolution>1</resolution>
+            <min_angle>0</min_angle><max_angle>6.265732014659643</max_angle>
+          </horizontal>
+        </scan>
+        <range><min>0.12</min><max>3.5</max><resolution>0.015</resolution></range>
+        <noise><type>gaussian</type><mean>0</mean><stddev>0.01</stddev></noise>
+      </lidar>
+    </sensor>
+  </gazebo>
+  <gazebo reference="lidar_3d_link">
+    <sensor name="burger_3d_lidar" type="gpu_lidar">
+      <always_on>true</always_on>
+      <update_rate>10</update_rate>
+      <topic>/lidar_3d</topic>
+      <gz_frame_id>lidar_3d_link</gz_frame_id>
+      <lidar>
+        <scan>
+          <horizontal>
+            <samples>720</samples><resolution>1</resolution>
+            <min_angle>-3.141592653589793</min_angle><max_angle>3.132866007329822</max_angle>
+          </horizontal>
+          <vertical>
+            <samples>16</samples><resolution>1</resolution>
+            <min_angle>-0.2617993877991494</min_angle><max_angle>0.2617993877991494</max_angle>
+          </vertical>
+        </scan>
+        <range><min>0.10</min><max>20</max><resolution>0.01</resolution></range>
+        <noise><type>gaussian</type><mean>0</mean><stddev>0.01</stddev></noise>
+      </lidar>
+    </sensor>
+  </gazebo>
+
+  <xacro:macro name="imu_noise" params="stddev">
+    <x><noise type="gaussian"><mean>0</mean><stddev>${stddev}</stddev></noise></x>
+    <y><noise type="gaussian"><mean>0</mean><stddev>${stddev}</stddev></noise></y>
+    <z><noise type="gaussian"><mean>0</mean><stddev>${stddev}</stddev></noise></z>
+  </xacro:macro>
+  <gazebo reference="imu_link">
+    <sensor name="burger_imu" type="imu">
+      <always_on>true</always_on>
+      <update_rate>200</update_rate>
+      <topic>/imu</topic>
+      <gz_frame_id>imu_link</gz_frame_id>
+      <imu>
+        <angular_velocity><xacro:imu_noise stddev="0.0002"/></angular_velocity>
+        <linear_acceleration><xacro:imu_noise stddev="0.017"/></linear_acceleration>
+      </imu>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="wheel_left_link"><mu1>1.0</mu1><mu2>1.0</mu2></gazebo>
+  <gazebo reference="wheel_right_link"><mu1>1.0</mu1><mu2>1.0</mu2></gazebo>
+  <gazebo reference="caster_back_link"><mu1>0.0</mu1><mu2>0.0</mu2></gazebo>
+  <gazebo>
+    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+      <left_joint>wheel_left_joint</left_joint><right_joint>wheel_right_joint</right_joint>
+      <wheel_separation>0.16</wheel_separation><wheel_radius>0.033</wheel_radius>
+      <max_linear_velocity>0.22</max_linear_velocity><min_linear_velocity>-0.22</min_linear_velocity>
+      <max_angular_velocity>2.0</max_angular_velocity><min_angular_velocity>-2.0</min_angular_velocity>
+      <max_linear_acceleration>0.5</max_linear_acceleration><min_linear_acceleration>-0.5</min_linear_acceleration>
+      <max_angular_acceleration>2.0</max_angular_acceleration><min_angular_acceleration>-2.0</min_angular_acceleration>
+      <topic>/cmd_vel</topic><odom_topic>/odom</odom_topic><tf_topic>/tf</tf_topic>
+      <frame_id>odom</frame_id><child_frame_id>base_footprint</child_frame_id>
+      <odom_publish_frequency>30</odom_publish_frequency>
+    </plugin>
+    <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+      <joint_name>wheel_left_joint</joint_name><joint_name>wheel_right_joint</joint_name>
+      <topic>/joint_states</topic>
+    </plugin>
+  </gazebo>
+</robot>
