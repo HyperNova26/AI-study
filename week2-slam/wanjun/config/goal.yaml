@@ -1,0 +1,7 @@
+# Demo coordinates for the supplied sandbox map, not a goal assigned by the team.
+frame_id: map
+x: 1.5
+y: -0.5
+yaw: 0.0  # radians; 0 means +X
+startup_timeout: 60.0  # wall-clock seconds
+navigation_timeout: 180.0
