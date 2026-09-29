@@ -1,0 +1,86 @@
+#usda 1.0
+(
+    defaultPrim = "Maze"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Maze"
+{
+    def Cube "south" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (10, 0.16, 0.65)
+        double3 xformOp:translate = (0, -4, 0.325)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "north" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (10, 0.16, 0.65)
+        double3 xformOp:translate = (0, 4, 0.325)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "west" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (0.16, 8, 0.65)
+        double3 xformOp:translate = (-5, 0, 0.325)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "east" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (0.16, 8, 0.65)
+        double3 xformOp:translate = (5, 0, 0.325)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "inner_00" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (6.5, 0.16, 0.65)
+        double3 xformOp:translate = (-1.75, -1.7, 0.325)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "inner_01" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (6.5, 0.16, 0.65)
+        double3 xformOp:translate = (1.75, 0.55, 0.325)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "inner_02" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (6.8, 0.16, 0.65)
+        double3 xformOp:translate = (-1.6, 2.8, 0.325)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+}
