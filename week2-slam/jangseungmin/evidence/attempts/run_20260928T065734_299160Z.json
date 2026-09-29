@@ -1,0 +1,251 @@
+{
+  "started_at_utc": "2026-09-28T06:57:34.299897+00:00",
+  "goal": {
+    "frame_id": "map",
+    "x": 1.5,
+    "y": -0.5,
+    "yaw": 0.0,
+    "startup_timeout": 60.0,
+    "navigation_timeout": 180.0
+  },
+  "status": "SUCCEEDED",
+  "start_pose": {
+    "x": -2.0000000000000044,
+    "y": -0.5,
+    "yaw": 8.809537581253507e-15
+  },
+  "action_status": "SUCCEEDED",
+  "nav2_error_code": 0,
+  "nav2_error_message": "",
+  "elapsed_wall_seconds": 44.577,
+  "final_pose": {
+    "x": 1.257452133669552,
+    "y": -0.6096090073349101,
+    "yaw": -0.0036488842619839027
+  },
+  "topic_message_counts": {
+    "/clock": 7609,
+    "/points": 187,
+    "/imu": 3658,
+    "/odom": 549,
+    "/scan": 93,
+    "/map": 1,
+    "/plan": 36,
+    "/cmd_vel": 534
+  },
+  "max_abs_cmd_vel_linear_x": 0.22,
+  "feedback": [
+    {
+      "distance_remaining_m": 0.0,
+      "navigation_time_s": 0.005,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.7945730686187744,
+      "navigation_time_s": 0.428,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.7457115650177,
+      "navigation_time_s": 0.902,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.7207114696502686,
+      "navigation_time_s": 1.428,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.620711088180542,
+      "navigation_time_s": 1.937,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.595712423324585,
+      "navigation_time_s": 2.398,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.520711898803711,
+      "navigation_time_s": 2.785,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.445711135864258,
+      "navigation_time_s": 3.287,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.420711040496826,
+      "navigation_time_s": 3.547,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.3457107543945312,
+      "navigation_time_s": 3.832,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.1705238819122314,
+      "navigation_time_s": 4.106,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.0957119464874268,
+      "navigation_time_s": 4.46,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 2.9707117080688477,
+      "navigation_time_s": 4.913,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 2.8707098960876465,
+      "navigation_time_s": 5.317,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 2.8207101821899414,
+      "navigation_time_s": 5.66,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 2.8485922813415527,
+      "navigation_time_s": 5.987,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 2.6707115173339844,
+      "navigation_time_s": 6.291,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 2.4857048988342285,
+      "navigation_time_s": 6.609,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 2.3957114219665527,
+      "navigation_time_s": 6.934,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 2.295710563659668,
+      "navigation_time_s": 7.339,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 2.873882532119751,
+      "navigation_time_s": 7.763,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 2.220710277557373,
+      "navigation_time_s": 8.289,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 2.0457096099853516,
+      "navigation_time_s": 8.787,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 2.0089619159698486,
+      "navigation_time_s": 9.094,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 1.8457098007202148,
+      "navigation_time_s": 9.65,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 1.7457107305526733,
+      "navigation_time_s": 10.145,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 1.6607707738876343,
+      "navigation_time_s": 10.697,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 1.5852776765823364,
+      "navigation_time_s": 11.156,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 1.4270442724227905,
+      "navigation_time_s": 11.626,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 1.3063956499099731,
+      "navigation_time_s": 12.087,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 1.2457102537155151,
+      "navigation_time_s": 12.492,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 1.1707102060317993,
+      "navigation_time_s": 12.939,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 1.1002687215805054,
+      "navigation_time_s": 13.308,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 1.0598139762878418,
+      "navigation_time_s": 13.649000000000001,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 0.9457111954689026,
+      "navigation_time_s": 14.004,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 0.8695614337921143,
+      "navigation_time_s": 14.454,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 0.7695930004119873,
+      "navigation_time_s": 14.9,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 0.6707106232643127,
+      "navigation_time_s": 15.313,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 0.595710813999176,
+      "navigation_time_s": 15.785,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 0.5207104086875916,
+      "navigation_time_s": 16.234,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 0.3707106411457062,
+      "navigation_time_s": 16.641,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 0.295710951089859,
+      "navigation_time_s": 17.097,
+      "recoveries": 0
+    }
+  ],
+  "position_error_m": 0.2661646143844016,
+  "yaw_error_rad": 0.0036488842619839027
+}

@@ -1,0 +1,45 @@
+{
+  "started_at_utc": "2026-09-29T06:55:57.507791+00:00",
+  "goal": {
+    "frame_id": "map",
+    "x": 1.8,
+    "y": 0.6,
+    "yaw": 0.0,
+    "startup_timeout": 60.0,
+    "navigation_timeout": 180.0
+  },
+  "status": "ABORTED",
+  "start_pose": {
+    "x": -2.0000000000000044,
+    "y": -0.5,
+    "yaw": 8.807304703914314e-15
+  },
+  "action_status": "ABORTED",
+  "nav2_error_code": 0,
+  "nav2_error_message": "",
+  "elapsed_wall_seconds": 7.517,
+  "final_pose": {
+    "x": -2.0000000000000044,
+    "y": -0.5,
+    "yaw": 8.807304703914314e-15
+  },
+  "topic_message_counts": {
+    "/clock": 431,
+    "/scan": 5,
+    "/points": 10,
+    "/imu": 182,
+    "/odom": 28,
+    "/map": 1,
+    "/plan": 1
+  },
+  "max_abs_cmd_vel_linear_x": 0.0,
+  "feedback": [
+    {
+      "distance_remaining_m": 0.0,
+      "navigation_time_s": 0.002,
+      "recoveries": 0
+    }
+  ],
+  "position_error_m": 3.9560080889705005,
+  "yaw_error_rad": 8.807304703914314e-15
+}

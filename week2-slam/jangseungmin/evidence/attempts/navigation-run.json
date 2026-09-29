@@ -1,0 +1,91 @@
+{
+  "started_at_utc": "2026-09-29T06:11:28.801880+00:00",
+  "goal": {
+    "frame_id": "map",
+    "x": 1.8,
+    "y": 0.6,
+    "yaw": 1.57,
+    "startup_timeout": 60.0,
+    "navigation_timeout": 180.0
+  },
+  "status": "ABORTED",
+  "start_pose": {
+    "x": -2.0000000000000044,
+    "y": -0.5,
+    "yaw": 8.805426577880566e-15
+  },
+  "action_status": "ABORTED",
+  "nav2_error_code": 0,
+  "nav2_error_message": "",
+  "elapsed_wall_seconds": 13.004,
+  "final_pose": {
+    "x": -1.915485078072712,
+    "y": -0.5008991865152407,
+    "yaw": -0.01975861513942809
+  },
+  "topic_message_counts": {
+    "/clock": 628,
+    "/points": 19,
+    "/imu": 341,
+    "/odom": 55,
+    "/map": 1,
+    "/scan": 9,
+    "/plan": 10,
+    "/cmd_vel": 45
+  },
+  "max_abs_cmd_vel_linear_x": 0.1147942990064621,
+  "feedback": [
+    {
+      "distance_remaining_m": 0.0,
+      "navigation_time_s": 0.0,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 4.883474349975586,
+      "navigation_time_s": 0.137,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 4.883726596832275,
+      "navigation_time_s": 0.261,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 4.930895805358887,
+      "navigation_time_s": 0.404,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 4.9914069175720215,
+      "navigation_time_s": 0.523,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 4.9914069175720215,
+      "navigation_time_s": 0.651,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 4.870710849761963,
+      "navigation_time_s": 0.817,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 4.767524719238281,
+      "navigation_time_s": 0.982,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 4.767524719238281,
+      "navigation_time_s": 1.087,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 4.737332820892334,
+      "navigation_time_s": 1.221,
+      "recoveries": 0
+    }
+  ],
+  "position_error_m": 3.8751526917336956,
+  "yaw_error_rad": 1.589758615139428
+}

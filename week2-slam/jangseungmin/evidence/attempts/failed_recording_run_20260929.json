@@ -1,0 +1,101 @@
+{
+  "started_at_utc": "2026-09-29T02:07:38.725191+00:00",
+  "goal": {
+    "frame_id": "map",
+    "x": 1.5,
+    "y": -0.5,
+    "yaw": 0.0,
+    "startup_timeout": 60.0,
+    "navigation_timeout": 180.0
+  },
+  "status": "ABORTED",
+  "start_pose": {
+    "x": -2.0000000000000044,
+    "y": -0.5,
+    "yaw": 8.802352756914895e-15
+  },
+  "action_status": "ABORTED",
+  "nav2_error_code": 0,
+  "nav2_error_message": "",
+  "elapsed_wall_seconds": 15.28,
+  "final_pose": {
+    "x": -1.7943649415077574,
+    "y": -0.5048762427616651,
+    "yaw": -0.04156506091602733
+  },
+  "topic_message_counts": {
+    "/clock": 965,
+    "/points": 31,
+    "/imu": 509,
+    "/odom": 89,
+    "/map": 1,
+    "/scan": 15,
+    "/plan": 12,
+    "/cmd_vel": 79
+  },
+  "max_abs_cmd_vel_linear_x": 0.1576269567012787,
+  "feedback": [
+    {
+      "distance_remaining_m": 0.0,
+      "navigation_time_s": 0.0,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.8119993209838867,
+      "navigation_time_s": 0.207,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.7582685947418213,
+      "navigation_time_s": 0.414,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.8441240787506104,
+      "navigation_time_s": 0.554,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.7707102298736572,
+      "navigation_time_s": 0.866,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.708495855331421,
+      "navigation_time_s": 1.098,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.7457096576690674,
+      "navigation_time_s": 1.304,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.7234647274017334,
+      "navigation_time_s": 1.5550000000000002,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.6457133293151855,
+      "navigation_time_s": 1.726,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.6602983474731445,
+      "navigation_time_s": 1.861,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.6649956703186035,
+      "navigation_time_s": 1.991,
+      "recoveries": 0
+    },
+    {
+      "distance_remaining_m": 3.571908950805664,
+      "navigation_time_s": 2.231,
+      "recoveries": 0
+    }
+  ],
+  "position_error_m": 3.2943685503566353,
+  "yaw_error_rad": 0.04156506091602733
+}
