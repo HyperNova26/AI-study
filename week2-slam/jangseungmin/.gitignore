@@ -1,0 +1,9 @@
+# Generated run reports, ROS logs and optional local recordings
+artifacts/
+log/
+frames*.pdf
+frames*.gv
+# Local ROS/Gazebo runtime and diagnostic output
+install/
+.ros/
+.gz/

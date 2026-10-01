@@ -1,0 +1,19 @@
+{
+  "started_at_utc": "2026-09-28T06:37:16.647145+00:00",
+  "goal": {
+    "frame_id": "map",
+    "x": 1.5,
+    "y": -0.5,
+    "yaw": 0.0,
+    "startup_timeout": 60.0,
+    "navigation_timeout": 180.0
+  },
+  "status": "TIMED_OUT",
+  "message": "Startup timed out: check simulator, sensors, TF and Nav2",
+  "terminal_state_after_cancel": "NO_ACCEPTED_GOAL",
+  "elapsed_wall_seconds": 60.083,
+  "final_pose": null,
+  "topic_message_counts": {},
+  "max_abs_cmd_vel_linear_x": 0.0,
+  "feedback": []
+}
