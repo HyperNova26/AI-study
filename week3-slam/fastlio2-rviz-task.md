@@ -22,6 +22,8 @@
 
 제공 환경은 운영자가 센서 입력과 FAST-LIO2 실행 가능 여부를 사전에 검증합니다.
 
+> 제공 자료: [실습 안내](guide.md) · [실행 환경과 교보재](preparation/README.md) · [예시 답안](Solution-HJ1/README.md)
+
 #### GitHub 제출물
 
 - FAST-LIO2 연결·실행에 사용한 코드와 launch·설정 파일

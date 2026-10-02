@@ -1,0 +1,6 @@
+# Isaac Lab output if train/play is run inside the repository instead of ~/aistudy_go2_runs
+logs/
+.pretrained_checkpoints/
+outputs/
+__pycache__/
+*.py[cod]

@@ -19,6 +19,8 @@ Isaac Lab과 RSL-RL의 기존 Go2 보행 예제를 활용해 정책을 학습하
 - GPU 사용 환경과 학습 시간 안내
 - 제출해야 할 실행용 `.pt` 형식 안내
 
+> 제공 자료: [실습 안내](guide.md) · [실행 예제와 교보재](preparation/README.md) · [예시 답안](Solution-HJ1/README.md)
+
 #### GitHub 제출물
 
 - **본인이 학습하여 내보낸 실행용 `.pt` 정책 파일**

@@ -1,0 +1,7 @@
+# Personal changes relative to ../preparation/config/fast_lio_burger.yaml.
+# launch/fast_lio_rviz.launch.py merges these at runtime and rejects unknown keys.
+# Experiments with other values (voxel size, LiDAR handler, extrinsic) are in README.md.
+/**:
+  ros__parameters:
+    pcd_save:
+      pcd_save_en: true    # enable the /map_save service; the launch file sets map_file_path

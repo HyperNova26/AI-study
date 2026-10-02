@@ -1,0 +1,7 @@
+# Keep shell scripts runnable from WSL or Windows clones (CRLF breaks bash).
+*.sh text eol=lf
+*.py text eol=lf
+*.usda text eol=lf
+*.pt binary
+*.onnx binary
+*.mp4 binary

@@ -1,0 +1,30 @@
+{
+  "duration_s": 137.26,
+  "truth_path_length_m": 15.592190823503106,
+  "estimates": {
+    "wheel": {
+      "topic": "/odom",
+      "samples": 4037,
+      "rate_hz": 29.411764705882348,
+      "final_err_xy_m": 0.017877521219853292,
+      "final_err_z_m": -1.8546326041836428e-07,
+      "final_err_yaw_deg": 0.0003398524506800227,
+      "rmse_xy_m": 0.012466881383586079,
+      "max_err_xy_m": 0.01792916638429284,
+      "max_abs_err_z_m": 1.8581989233503005e-07,
+      "max_abs_err_yaw_deg": 0.006027325071532115
+    },
+    "fastlio": {
+      "topic": "/Odometry",
+      "samples": 1365,
+      "rate_hz": 9.941690962171586,
+      "final_err_xy_m": 0.0008900297588520771,
+      "final_err_z_m": 0.024728678134561477,
+      "final_err_yaw_deg": 0.07719725563858947,
+      "rmse_xy_m": 0.0024401855821866614,
+      "max_err_xy_m": 0.010535796127336659,
+      "max_abs_err_z_m": 0.04756043975412354,
+      "max_abs_err_yaw_deg": 0.12348810820895278
+    }
+  }
+}
