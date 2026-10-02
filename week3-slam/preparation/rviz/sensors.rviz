@@ -1,0 +1,175 @@
+# Sensor check view for the week-3 simulation (no Nav2, so the fixed frame is odom).
+# Structure follows week2-slam/wanjun/rviz/practice.rviz (adapted from Nav2 1.3.13, Apache-2.0).
+Panels:
+- Class: rviz_common/Displays
+  Help Height: 0
+  Name: Displays
+  Property Tree Widget:
+    Expanded:
+    - /Global Options1
+    Splitter Ratio: 0.58
+  Tree Height: 420
+- Class: rviz_common/Views
+  Expanded:
+  - /Current View1
+  Name: Views
+  Splitter Ratio: 0.33
+Visualization Manager:
+  Class: ''
+  Displays:
+  - Alpha: 0.5
+    Cell Size: 1
+    Class: rviz_default_plugins/Grid
+    Color: 160; 160; 164
+    Enabled: true
+    Line Style:
+      Line Width: 0.03
+      Value: Lines
+    Name: Grid
+    Normal Cell Count: 0
+    Offset:
+      X: 0
+      Y: 0
+      Z: 0
+    Plane: XY
+    Plane Cell Count: 10
+    Reference Frame: <Fixed Frame>
+    Value: true
+  - Alpha: 1
+    Class: rviz_default_plugins/RobotModel
+    Collision Enabled: false
+    Description File: ''
+    Description Source: Topic
+    Description Topic:
+      Depth: 5
+      Durability Policy: Transient Local
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /robot_description
+    Enabled: true
+    Name: RobotModel
+    TF Prefix: ''
+    Update Interval: 0
+    Value: true
+    Visual Enabled: true
+  - Class: rviz_default_plugins/TF
+    Enabled: true
+    Frame Timeout: 15
+    Frames:
+      All Enabled: false
+      odom:
+        Value: true
+      base_footprint:
+        Value: true
+      base_scan:
+        Value: true
+      lidar_3d_link:
+        Value: true
+      imu_link:
+        Value: true
+    Marker Scale: 0.4
+    Name: TF
+    Show Arrows: false
+    Show Axes: true
+    Show Names: true
+    Update Interval: 0
+    Value: true
+  - Alpha: 1
+    Class: rviz_default_plugins/LaserScan
+    Color: 255; 255; 255
+    Color Transformer: FlatColor
+    Decay Time: 0
+    Enabled: true
+    Name: 2D LiDAR
+    Position Transformer: XYZ
+    Size (Pixels): 3
+    Style: Points
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Best Effort
+      Value: /scan
+    Use Fixed Frame: true
+    Value: true
+  - Class: rviz_default_plugins/PointCloud2
+    Name: 3D LiDAR (FAST-LIO2 input)
+    Enabled: true
+    Value: true
+    Topic:
+      Value: /points_fastlio
+      Depth: 5
+      Reliability Policy: Best Effort
+      Durability Policy: Volatile
+      History Policy: Keep Last
+    Style: Points
+    Size (Pixels): 2
+    Alpha: 1.0
+    Position Transformer: XYZ
+    Color Transformer: AxisColor
+    Axis: Z
+    Use Fixed Frame: true
+    Decay Time: 0.0
+  - Class: rviz_default_plugins/Odometry
+    Name: Wheel odometry
+    Enabled: true
+    Value: true
+    Topic:
+      Value: /odom
+      Depth: 5
+      Reliability Policy: Reliable
+      Durability Policy: Volatile
+      History Policy: Keep Last
+    Keep: 50
+    Position Tolerance: 0.1
+    Angle Tolerance: 0.3
+    Shape:
+      Value: Arrow
+      Color: 0; 120; 255
+      Alpha: 1
+      Shaft Length: 0.25
+      Shaft Radius: 0.02
+      Head Length: 0.08
+      Head Radius: 0.05
+    Covariance:
+      Value: false
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: odom
+    Frame Rate: 30
+  Name: root
+  Tools:
+  - Class: rviz_default_plugins/MoveCamera
+  - Class: rviz_default_plugins/Select
+  - Class: rviz_default_plugins/FocusCamera
+  - Class: rviz_default_plugins/Measure
+    Line color: 128; 128; 0
+  Transformation:
+    Current:
+      Class: rviz_default_plugins/TF
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Name: Current View
+      Target Frame: <Fixed Frame>
+      Distance: 7.0
+      Pitch: 0.7
+      Yaw: 3.6
+      Focal Point:
+        X: 1.5
+        Y: 0.5
+        Z: 0.0
+    Saved: null
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 1000
+  Width: 1600
+  X: 0
+  Y: 0
+  Hide Left Dock: false
+  Hide Right Dock: true
+  Views:
+    collapsed: true

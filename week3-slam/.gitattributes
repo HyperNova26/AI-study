@@ -1,0 +1,10 @@
+# Keep scripts and patches byte-exact for WSL or Windows clones (CRLF breaks bash and git apply).
+*.sh text eol=lf
+*.py text eol=lf
+*.patch text eol=lf
+*.msg text eol=lf
+*.yaml text eol=lf
+*.rviz text eol=lf
+*.xacro text eol=lf
+*.png binary
+*.mp4 binary

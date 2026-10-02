@@ -1,0 +1,8 @@
+# FAST-LIO2 is built outside the repository (scripts/build_fast_lio.sh -> ~/aistudy_fastlio_ws).
+# Local run output; copy the files you submit into media/.
+results/
+build/
+install/
+log/
+__pycache__/
+*.py[cod]
