@@ -1,0 +1,5 @@
+# Wrong LiDAR position: 0.15 m forward of the true mounting (provided: [0.0, 0.0, 0.192]).
+/**:
+  ros__parameters:
+    mapping:
+      extrinsic_T: [0.15, 0.0, 0.192]

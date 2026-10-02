@@ -1,0 +1,5 @@
+# Velodyne handler: no `time` field in the Gazebo cloud, so point times are guessed from azimuth.
+/**:
+  ros__parameters:
+    preprocess:
+      lidar_type: 2
