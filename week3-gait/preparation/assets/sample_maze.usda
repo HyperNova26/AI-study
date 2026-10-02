@@ -1,0 +1,75 @@
+#usda 1.0
+(
+    defaultPrim = "Maze"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Maze"
+{
+    def Cube "south" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (8, 0.15, 0.6)
+        double3 xformOp:translate = (0, -3, 0.3)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "north" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (8, 0.15, 0.6)
+        double3 xformOp:translate = (0, 3, 0.3)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "west" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (0.15, 6, 0.6)
+        double3 xformOp:translate = (-4, 0, 0.3)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "east" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (0.15, 6, 0.6)
+        double3 xformOp:translate = (4, 0, 0.3)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "inner_south" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (5.5, 0.15, 0.6)
+        double3 xformOp:translate = (-1.25, -1, 0.3)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "inner_north" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (5.5, 0.15, 0.6)
+        double3 xformOp:translate = (1.25, 1, 0.3)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+}
