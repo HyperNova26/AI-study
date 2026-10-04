@@ -1,0 +1,5 @@
+# Baseline replay; map saving is disabled in both replay variants.
+/**:
+  ros__parameters:
+    filter_size_surf: 0.1
+    filter_size_map: 0.1
