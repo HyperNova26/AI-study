@@ -1,0 +1,5 @@
+# Coarser downsampling for scans and map (provided: 0.1 m).
+/**:
+  ros__parameters:
+    filter_size_surf: 0.2
+    filter_size_map: 0.2
