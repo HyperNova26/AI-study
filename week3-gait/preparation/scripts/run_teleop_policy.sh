@@ -27,7 +27,8 @@ export ROS_VERSION=2
 export ROS_PYTHON_VERSION=3
 export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 export PYTHONPATH="${ROS_CORE}/rclpy"
-export LD_LIBRARY_PATH="${ROS_CORE}/lib"
+NVIDIA_LIB="$(python -c 'import nvidia; print(nvidia.__path__[0])')"
+export LD_LIBRARY_PATH="${ROS_CORE}/lib:${NVIDIA_LIB}/cu13/lib"
 # Relative --policy/--maze-usd paths are resolved from the current directory. The provided pretrained
 # checkpoint is downloaded to .pretrained_checkpoints/ there (git-ignored in week3-gait/).
 exec "${ISAACLAB_ROOT}/isaaclab.sh" -p "${script_dir}/../go2_policy_teleop.py" "$@"

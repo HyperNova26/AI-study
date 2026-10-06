@@ -1,0 +1,4 @@
+.pretrained_checkpoints/
+__pycache__/
+logs/
+*.py[cod]
