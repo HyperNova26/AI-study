@@ -1,0 +1,64 @@
+#usda 1.0
+(
+    defaultPrim = "JaeDaeMaze"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "JaeDaeMaze"
+{
+    def Cube "boundary_south" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (11, 0.16, 0.65)
+        double3 xformOp:translate = (0, -4.5, 0.325)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "boundary_north" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (11, 0.16, 0.65)
+        double3 xformOp:translate = (0, 4.5, 0.325)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "boundary_west" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (0.16, 9, 0.65)
+        double3 xformOp:translate = (-5.5, 0, 0.325)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "boundary_east" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (0.16, 9, 0.65)
+        double3 xformOp:translate = (5.5, 0, 0.325)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "divider" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform bool physics:collisionEnabled = 1
+        double size = 1
+        float3 xformOp:scale = (8, 0.16, 0.65)
+        double3 xformOp:translate = (-1.5, 0, 0.325)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+}
