@@ -1,0 +1,57 @@
+# FAST-LIO2 base settings for the simulated Burger (16-channel 3D LiDAR + IMU).
+# Implementation: hku-mars/FAST_LIO branch ROS2, commit a4743b0 (see scripts/build_fast_lio.sh).
+# Parameter names follow that commit's src/laserMapping.cpp. Explanations: docs/fastlio2.md.
+/**:
+  ros__parameters:
+    feature_extract_enable: false
+    point_filter_num: 1          # not used by the generic handler selected below
+    max_iteration: 3             # iterated EKF updates per scan
+    filter_size_surf: 0.1        # voxel size (m) for downsampling each scan
+    filter_size_map: 0.1         # voxel size (m) for points added to the map
+    cube_side_length: 100.0      # side (m) of the local map box kept in the ikd-Tree; keep it above
+                                 # 3 x det_range or the box is recentred (and trimmed) on every scan
+    runtime_pos_log_enable: false
+    map_file_path: ""
+
+    common:
+      lid_topic: "/points_fastlio"   # finite points from tools/points_to_fastlio.py
+      imu_topic: "/imu"
+      time_sync_en: false            # both sensors are stamped by the same Gazebo clock
+      time_offset_lidar_to_imu: 0.0
+
+    preprocess:
+      # 1 Livox, 2 Velodyne, 3 Ouster, 4 MID360 (yaw-based point time) at this commit.
+      # Any other value selects the generic x/y/z/intensity handler, which gives every point
+      # the scan stamp; that matches Gazebo, which renders a whole scan at one instant.
+      lidar_type: 5
+      scan_line: 16
+      scan_rate: 10
+      timestamp_unit: 0
+      blind: 0.2                   # ignore points closer than this (m)
+
+    mapping:
+      acc_cov: 0.1
+      gyr_cov: 0.1
+      b_acc_cov: 0.0001
+      b_gyr_cov: 0.0001
+      fov_degree: 360.0            # read but not used by this commit
+      det_range: 20.0              # not a range filter: the map box moves when the LiDAR comes within
+                                   # 1.5 x det_range of its edge (3D LiDAR max range is 20 m)
+      extrinsic_est_en: false      # the URDF gives the exact mounting
+      # LiDAR pose in the IMU frame: lidar_3d_link (z=0.260) minus imu_link (z=0.068) on base_link.
+      extrinsic_T: [0.0, 0.0, 0.192]
+      extrinsic_R: [1.0, 0.0, 0.0,
+                    0.0, 1.0, 0.0,
+                    0.0, 0.0, 1.0]
+
+    publish:
+      path_en: true                # /path
+      effect_map_en: false         # /cloud_effected
+      map_en: true                 # /Laser_map: adds the current scan once per second, never shrinks
+      scan_publish_en: true        # /cloud_registered and /cloud_registered_body
+      dense_publish_en: false      # add downsampled scans; true reaches ~640k map points in one minute
+      scan_bodyframe_pub_en: true
+
+    pcd_save:
+      pcd_save_en: false           # true: `ros2 service call /map_save std_srvs/srv/Trigger` writes
+      interval: -1                 # the /Laser_map points to map_file_path (absolute path)
